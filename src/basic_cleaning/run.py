@@ -33,6 +33,8 @@ def go(args):
     df['last_review'] = pd.to_datetime(df['last_review'])
 
     outfile = args.input_artifact
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
     df.to_csv(outfile, index=False)
 
     logger.info("Creating artifact")
